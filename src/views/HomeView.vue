@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div v-if="times">
+    <h2>Hello! Il est {{ times.timeline }}</h2>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import axios from "axios";
 
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
+
+  data() {
+    return {
+      times: null,
+    };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:3000/api/time", {
+        responseType: "json",
+      })
+      .then((response) => {
+        this.times = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>
