@@ -1,8 +1,6 @@
-<template>
+<!-- <template>
   <div v-if="times">
-    <h2>
-      Hello! Il est <button @click="newCall()">{{ times.timeline }}</button>
-    </h2>
+    <h2>Hello! Il est {{ times.timeline }}</h2>
   </div>
 </template>
 
@@ -38,5 +36,12 @@ export default {
   mounted() {
     this.newCall();
   },
+
+  created() {
+    this.intervalID = setInterval(() => {
+      this.newCall();
+    }, 3000);
+    console.log(this.newCall);
+  },
 };
-</script>
+</script> -->
