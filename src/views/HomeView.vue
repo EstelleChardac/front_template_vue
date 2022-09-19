@@ -1,33 +1,29 @@
 <template>
-  <div v-if="times">
-    <h2>
-      Hello! Il est <button @click="newCall()">{{ times.timeline }}</button>
-    </h2>
+  <div v-if="moment">
+    <h2>Hello! Il est {{ moment }}</h2>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import axios from "axios";
 
 export default {
-  name: "HomeView",
-
   data() {
     return {
-      times: null,
-      intervalID: null,
+      moment: null,
+      interval: null,
     };
   },
 
   methods: {
-    newCall() {
+    reLoad() {
       axios
-        .get("http://localhost:3000/api/time", {
+        .get("http://localhost:3000/moment", {
           responseType: "json",
         })
         .then((response) => {
-          this.times = response.data;
+          this.moment = response.data;
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -36,7 +32,16 @@ export default {
   },
 
   mounted() {
-    this.newCall();
+    this.reLoad();
+  },
+
+  created() {
+    this.interval = setInterval(() => {
+      this.reLoad();
+    }, 1000);
+  },
+  unmounted() {
+    clearInterval(this.interval);
   },
 };
 </script>

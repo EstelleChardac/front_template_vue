@@ -45,3 +45,24 @@ export default {
   },
 };
 </script> -->
+
+<!-- 
+<template>
+    <h2>Hello! Il est {{ moment(new Date()).format("HH:mm:ss") }}</h2>
+  </template>
+  
+  <script>
+  // @ is an alias to /src
+  import moment from "moment";
+  
+  export default {
+    name: "HomeView",
+  
+    data() {
+      return {
+        times: null,
+        moment: moment,
+      };
+    },
+  };
+  </script> -->
